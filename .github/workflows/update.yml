@@ -14,15 +14,24 @@ jobs:
       - uses: actions/checkout@v2
         with: 
           ref: 'main'
-          #token: what do
+          persist-credentials: false 
+          fetch-depth: 0 
 
       - name: Install dependecies
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: install
           
-      - name: Run script
+      - name: Run update.py
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run update.py
+          command: run python3 update.py
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.push_token }}
+          branch: upgrade-staging
+          force: true
+
       
