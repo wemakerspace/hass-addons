@@ -77,11 +77,10 @@ def update_tailscale():
             f.write(new_docker)        
 
         # git add/commit/push
-        # call_all_or_fail(
-        #     ["git", "add", config_path],
-        #     ["git" "add", build_path],
-        #     ["git", "commit", "-m", f"updated tailscale to {config_version}"]
-        # )
+        call_all_or_fail(
+            ["git", "add", config_path, docker_path, build_path],
+            ["git", "commit", "-m", f"updated tailscale to {config_version}"]
+        )
 
         return (local_version, config_version)
         

@@ -1,0 +1,28 @@
+name: Hass-Addons-updatepy
+
+on: 
+  push:
+    branches: 
+      - cicd
+  # schedule:
+  #   - cron: '* * 1,14,28 * *'
+
+jobs:
+  run-update-py:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with: 
+          ref: 'main'
+          #token: what do
+
+      - name: Install dependecies
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: install
+          
+      - name: Run script
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run update.py
+      
